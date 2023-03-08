@@ -2,13 +2,14 @@ import { Text, View } from 'react-native'
 import React from 'react'
 import { StyleSheet, Modal} from 'react-native';
 
-
 const EnviarFormulario = ({ 
  
     modalVisible,
     onDeleteModal,
     Pressable,
     onCancelModal,
+    selectedItem,
+    template
     
   }) => { 
 
@@ -32,7 +33,7 @@ const EnviarFormulario = ({
               <Pressable
                 style={[styles.button, styles.buttonDelete]}
                 onPress={() => {
-                  onDeleteModal(selectedItem.id);
+                  onDeleteModal(selectedItem.id,template);
                 }}
               >
                 <Text style={styles.textStyle}>Eliminar</Text>
@@ -99,4 +100,4 @@ const EnviarFormulario = ({
   },
 });
   
-  export default EnviarFormulario()
+  export default EnviarFormulario

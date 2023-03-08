@@ -1,7 +1,8 @@
 import React, {useState } from 'react';
 import { StyleSheet, Text, TextInput, Button, View, FlatList, Pressable} from 'react-native';
 import { LinearGradient} from 'expo-linear-gradient';
-import EnviarFormulario from './src/components/ejemplosTp';
+import EnviarFormulario from './src/components/Modal';
+import Card from './src/components/card';
 
 export default function App() {
   const [itemText, setItemText] = useState("");
@@ -10,8 +11,9 @@ export default function App() {
   const [items2, setItems2] = useState([]);
   const [modalVisible, setModalVisible] = useState(false);
   const [selectedItem, setSelectedItem] = useState("");
-  const [titleText] = useState("Comida");
-  const [titleText2] = useState("Bebidas");
+  const [template, setTemplate]=useState("");
+  const titleText = "food"
+  const titleText2 = "drinks"
 
   const onChangeText = (text) => {
     setItemText(text);
@@ -31,19 +33,20 @@ export default function App() {
     setItemText2("");
   };
 
-  const openModal = (item) => {
-    setSelectedItem(item);
-    setModalVisible(true);
+  const openModal = (item,type) => {
+    setSelectedItem(item)
+    setTemplate(type)
+    setModalVisible(true)
   };
 
   const onCancelModal = () => {
     setModalVisible(!modalVisible);
   };
 
-  const onDeleteModal = (id) => {
+  const onDeleteModal = (id,type) => {
     setModalVisible(!modalVisible);
-    setItems((oldArry) => oldArry.filter((item) => item.id !== id));
-    setSelectedItem("");
+    type ==='food' ? setItems((oldArry) => oldArry.filter((item) => item.id !== id)) :
+    setItems2((oldArry) => oldArry.filter((item) => item.id !== id)) ; setSelectedItem("")
   };
 
   return (
@@ -64,21 +67,14 @@ export default function App() {
       onChangeText={onChangeText}
       value={itemText}
     />
-    <Button title="Agregar" onPress={addItemToState} />
+    <Button title="Agregar" disabled={itemText===''} onPress={addItemToState} />
   </View>
 
   <FlatList                      
     data={items}
     renderItem={(itemData) => (
-      <Pressable
-        style={styles.itemContainer}
-        onPress={() => {
-          openModal(itemData.item);
-        }}
-      >
-        <Text style={styles.item}>{itemData.item.value}</Text>
-      </Pressable>
-    )}
+      <Card openModal={openModal} itemData={itemData} type='food'/>)}
+
     keyExtractor={(item) => item.id.toString()}
     />
 
@@ -97,30 +93,25 @@ export default function App() {
       onChangeText={onChangeText2}
       value={itemText2}
     />
-    <Button title="Agregar" onPress={addItemToState2} />
+    <Button title="Agregar" disabled={itemText2 === ''} onPress={addItemToState2} />
   </View>
 
   <FlatList                      
     data={items2}
     renderItem={(itemData2) => (
-      <Pressable
-        style={styles.itemContainer}
-        onPress={() => {
-          openModal(itemData2.item);
-        }}
-      >
-        <Text style={styles.item}>{itemData2.item.value}</Text>
-      </Pressable>
-    )}
+      <Card itemData={itemData2} openModal={openModal} type= 'drinks'/>)}
+
     keyExtractor={(item2) => item2.id.toString()}
     />
 
-<EnviarFormulario
+{modalVisible&&<EnviarFormulario
 Pressable={Pressable}
 modalVisible={modalVisible}
 onDeleteModal={onDeleteModal}
 onCancelModal={onCancelModal}
-/>
+selectedItem={selectedItem}
+template={template}
+/>}
 
   
   </LinearGradient>
@@ -165,10 +156,3 @@ const styles = StyleSheet.create({
   },
 });
 
-/*
-<EnviarFormulario
-Pressable={Pressable}
-modalVisible={modalVisible}
-onDeleteModal={selectedItem}
-onCancelModal={onCancelModal}
-/>*/
