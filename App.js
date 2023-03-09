@@ -1,12 +1,28 @@
 import React, {useState } from 'react';
 import { StyleSheet, Text, TextInput, Button, View, FlatList, Pressable} from 'react-native';
 import { LinearGradient} from 'expo-linear-gradient';
+import { useFonts } from 'expo-font';
+import * as SplashScreen from 'expo-splash-screen';
+SplashScreen.preventAutoHideAsync();
+
 
 import EnviarFormulario from './src/components/Modal';
 import Card from './src/components/card';
 import ColorsAndSize from './src/components/constantes/ColorsAndSize';
 
 export default function App() {
+  const [fontsLoaded] = useFonts({
+    'OpenSans-Bold': require('./assets/fonts/OpenSans-Bold.ttf'),
+    'OpenSans-Regular': require('./assets/fonts/OpenSans-Regular.ttf')
+  });
+
+  const onLayoutRootView = React.useCallback(async () => {
+    if (fontsLoaded) {
+      await SplashScreen.hideAsync();
+    }
+  }, [fontsLoaded]);
+
+
   const [itemText, setItemText] = useState("");
   const [itemText2, setItemText2] = useState("");
   const [items, setItems] = useState([]);
@@ -51,6 +67,10 @@ export default function App() {
     setItems2((oldArry) => oldArry.filter((item) => item.id !== id)) ; setSelectedItem("")
   };
 
+  if (!fontsLoaded) {
+    return null;
+  }
+
   return (
      
   <LinearGradient style={styles.screen}
@@ -62,7 +82,7 @@ export default function App() {
   </Text>
 </Text>
 
-<View style={styles.addItemInputContainer}> 
+<View style={styles.addItemInputContainer} onLayoutRootView={onLayoutRootView}> 
     <TextInput
       placeholder="Item de lista"
       style={styles.input}
@@ -83,7 +103,7 @@ export default function App() {
 
 
 <Text style={styles.baseText}>
-  <Text style={styles.titleText}>
+  <Text style={styles.titleText2}>
     {titleText2}
   </Text>
 </Text>
@@ -114,7 +134,6 @@ onCancelModal={onCancelModal}
 selectedItem={selectedItem}
 template={template}
 />}
-
   
   </LinearGradient>
   );
@@ -144,7 +163,7 @@ const styles = StyleSheet.create({
     margin: 15,
     padding: 10,
     borderRadius: 5,
-    backgroundColor: ColorsAndSize.primary,
+    backgroundColor: ColorsAndSize.secondary,
   },
   item: {
     padding: 10,
@@ -154,7 +173,12 @@ const styles = StyleSheet.create({
   titleText: {
     flex: 1,
     fontSize: 28,
-    fontWeight: 'bold',
+    fontFamily: 'OpenSans-Regular'
+  },
+  titleText2: {
+    flex: 1,
+    fontSize: 28,
+    fontFamily: 'OpenSans-Bold'
   },
 });
 
