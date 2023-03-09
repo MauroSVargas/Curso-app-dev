@@ -1,8 +1,10 @@
 import React, {useState } from 'react';
 import { StyleSheet, Text, TextInput, Button, View, FlatList, Pressable} from 'react-native';
 import { LinearGradient} from 'expo-linear-gradient';
+
 import EnviarFormulario from './src/components/Modal';
 import Card from './src/components/card';
+import ColorsAndSize from './src/components/constantes/ColorsAndSize';
 
 export default function App() {
   const [itemText, setItemText] = useState("");
@@ -121,9 +123,9 @@ template={template}
 const styles = StyleSheet.create({
   screen: {
     flex:  1,
-    padding: 35,
     alignItems: 'center',
     justifyContent: 'center',
+    padding: 35
   },
 
   addItemInputContainer: {
@@ -142,7 +144,7 @@ const styles = StyleSheet.create({
     margin: 15,
     padding: 10,
     borderRadius: 5,
-    backgroundColor: "white",
+    backgroundColor: ColorsAndSize.primary,
   },
   item: {
     padding: 10,
