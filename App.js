@@ -82,7 +82,7 @@ export default function App() {
   </Text>
 </Text>
 
-<View style={styles.addItemInputContainer} onLayoutRootView={onLayoutRootView}> 
+<View style={styles.addItemInputContainer} /*onLayoutRootView={onLayoutRootView}*/> 
     <TextInput
       placeholder="Item de lista"
       style={styles.input}
