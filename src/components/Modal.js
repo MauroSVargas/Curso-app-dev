@@ -2,6 +2,8 @@ import { Text, View } from 'react-native'
 import React from 'react'
 import { StyleSheet, Modal} from 'react-native';
 
+import ColorsAndSize from './constantes/ColorsAndSize';
+
 const EnviarFormulario = ({ 
  
     modalVisible,
@@ -48,9 +50,7 @@ const EnviarFormulario = ({
  const styles = StyleSheet.create({
 
   modalMainView: {
-    flex: 1,
-    justifyContent: "center",
-    alignItems: "center",
+    ...ColorsAndSize.normalSize,
   },
   modalView: {
     margin: 20,

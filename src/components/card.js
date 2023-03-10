@@ -1,5 +1,6 @@
 import { Pressable, StyleSheet, Text} from 'react-native'
 import React from 'react'
+import ColorsAndSize from './constantes/ColorsAndSize';
 
 const Card = ({openModal, itemData, type}) => {
 
@@ -24,7 +25,7 @@ const styles = StyleSheet.create({
         margin: 15,
         padding: 10,
         borderRadius: 5,
-        backgroundColor: "white",
+        backgroundColor: ColorsAndSize.secondary,
       },
 
       item: {

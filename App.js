@@ -9,6 +9,7 @@ SplashScreen.preventAutoHideAsync();
 import EnviarFormulario from './src/components/Modal';
 import Card from './src/components/card';
 import ColorsAndSize from './src/components/constantes/ColorsAndSize';
+import ChooseItem from './src/components/ChooseItem';
 
 export default function App() {
   const [fontsLoaded] = useFonts({
@@ -16,12 +17,11 @@ export default function App() {
     'OpenSans-Regular': require('./assets/fonts/OpenSans-Regular.ttf')
   });
 
-  const onLayoutRootView = React.useCallback(async () => {
-    if (fontsLoaded) {
-      await SplashScreen.hideAsync();
-    }
-  }, [fontsLoaded]);
-
+React.useEffect(() => {
+  if (fontsLoaded) {
+    SplashScreen.hideAsync();
+  }
+} , [fontsLoaded]);
 
   const [itemText, setItemText] = useState("");
   const [itemText2, setItemText2] = useState("");
@@ -82,12 +82,13 @@ export default function App() {
   </Text>
 </Text>
 
-<View style={styles.addItemInputContainer} /*onLayoutRootView={onLayoutRootView}*/> 
+<View style={styles.addItemInputContainer}> 
     <TextInput
       placeholder="Item de lista"
       style={styles.input}
       onChangeText={onChangeText}
       value={itemText}
+      maxLength = {14}
     />
     <Button title="Agregar" disabled={itemText===''} onPress={addItemToState} />
   </View>
@@ -134,6 +135,9 @@ onCancelModal={onCancelModal}
 selectedItem={selectedItem}
 template={template}
 />}
+
+<ChooseItem>
+</ChooseItem>
   
   </LinearGradient>
   );
@@ -141,9 +145,7 @@ template={template}
 
 const styles = StyleSheet.create({
   screen: {
-    flex:  1,
-    alignItems: 'center',
-    justifyContent: 'center',
+    ...ColorsAndSize.normalSize,
     padding: 35
   },
 
@@ -159,22 +161,13 @@ const styles = StyleSheet.create({
     borderBottomColor: "black",
     borderBottomWidth: 1,
   },
-  itemContainer: {
-    margin: 15,
-    padding: 10,
-    borderRadius: 5,
-    backgroundColor: ColorsAndSize.secondary,
-  },
-  item: {
-    padding: 10,
-    textAlign: "center",
-  },
 
   titleText: {
     flex: 1,
-    fontSize: 28,
+    fontSize: 32,
     fontFamily: 'OpenSans-Regular'
   },
+  
   titleText2: {
     flex: 1,
     fontSize: 28,
