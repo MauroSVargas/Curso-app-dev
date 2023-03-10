@@ -8,7 +8,7 @@ const ListaSorteada = () => {
     const [items3, setItems3] = useState([]);
 
     const ArraysJuntos = ol
-      };
+      
 
   return (
     <LinearGradient>
