@@ -1,36 +1,32 @@
-import { StyleSheet, Text, View,FlatList } from 'react-native'
-import React from 'react'
+import { StyleSheet, Text, View,FlatList,Button } from 'react-native'
+import React, {useState} from 'react'
 import { LinearGradient } from 'expo-linear-gradient'
 
-
+import Card from './card'
+import Modal from './Modal'
+import EnviarFormulario from './Modal'
 
 const ListaSorteada = () => {
-/*
+
     const [itemText3, setItemText3] = useState("");
-    const [items3, setItems3] = useState(SortItems());
+    const [items3, setItems3] = useState(ArrayNuevo);
 
     const ArrayNuevo = () =>
-    items3 (NewArry => [sortItems(), {value:itemText3}]);
+    setItems3 ((NewArry) => [sortItems(), {id: Date.now(), value:itemText3 }]);
     setItemText3("");
       
-*/
-  return (
-    <LinearGradient>
+    return (
       <View> 
       <Button title='Ordenar Items'  onPress ={() =>
-SortItems}/>
-
-<FlatList                      
-    data={items3}
-    renderItem={() => {
-      SortItems}}
-
-    keyExtractor={(item3) => item3.toString()}
-    />
-    </View>
-    </LinearGradient>
-  )
-}
+        SortItems()}/>
+        
+        <FlatList                      
+            data={items3}
+            renderItem={(itemData3) => {
+              ArrayNuevo}}
+            />
+            </View>
+)}
 
 export default ListaSorteada
 
