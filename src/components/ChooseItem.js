@@ -1,20 +1,20 @@
 import { StyleSheet, Text, View, Button } from 'react-native'
 import React, {useState} from 'react'
 
+import  { App } from '../../App';
+import ListaSorteada from './ListaSorteada';
 
+/*
 const ChooseItem = () => {
 
-    const [confirmed, setConfirmed] = useState([]);
+    const [confirmed, setConfirmed] = useState("");
 
     const resetInputHandler = () => {
         setConfirmed(false);
       }
 
-    const SortItems = () => {
-        setConfirmed((NewArry) => [...oldArry, { id: Date.now(), value: itemText }] ,
-        [...oldArry2, { id: Date.now(), value: itemText2 }])
-        confirmed("");
-    }
+    const SortItems = items.concat(items2)
+    
     
 /*
     const ListaDeItems = { 
@@ -27,10 +27,12 @@ const ChooseItem = () => {
 */
   
   
-  
+  /*
     return (
-        <View> 
-    <Button title='Sortear Items' onPress={SortItems}/>
+    
+    <View> 
+      <Button title='Ordenar Items' onPress= {SortItems} content = <ListaSorteada/>
+      /> 
     </View>
   )
 }
@@ -39,4 +41,4 @@ export default ChooseItem
 
 const styles = StyleSheet.create({
 
-})
+})*/

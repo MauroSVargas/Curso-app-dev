@@ -1,5 +1,5 @@
 import React, {useState } from 'react';
-import { StyleSheet, Text, TextInput, Button, View, FlatList, Pressable} from 'react-native';
+import { StyleSheet, Text, TextInput, Button, View, FlatList, Pressable, TouchableWithoutFeedback} from 'react-native';
 import { LinearGradient} from 'expo-linear-gradient';
 import { useFonts } from 'expo-font';
 import * as SplashScreen from 'expo-splash-screen';
@@ -9,7 +9,7 @@ SplashScreen.preventAutoHideAsync();
 import EnviarFormulario from './src/components/Modal';
 import Card from './src/components/card';
 import ColorsAndSize from './src/components/constantes/ColorsAndSize';
-import ChooseItem from './src/components/ChooseItem';
+import ListaSorteada from './src/components/ListaSorteada';
 
 export default function App() {
   const [fontsLoaded] = useFonts({
@@ -27,6 +27,8 @@ React.useEffect(() => {
   const [itemText2, setItemText2] = useState("");
   const [items, setItems] = useState([]);
   const [items2, setItems2] = useState([]);
+  const [itemText3, setItemText3] = useState("");
+  const [items3, setItems3] = useState([]);
   const [modalVisible, setModalVisible] = useState(false);
   const [selectedItem, setSelectedItem] = useState("");
   const [template, setTemplate]=useState("");
@@ -60,6 +62,7 @@ React.useEffect(() => {
   const onCancelModal = () => {
     setModalVisible(!modalVisible);
   };
+  
 
   const onDeleteModal = (id,type) => {
     setModalVisible(!modalVisible);
@@ -67,14 +70,18 @@ React.useEffect(() => {
     setItems2((oldArry) => oldArry.filter((item) => item.id !== id)) ; setSelectedItem("")
   };
 
+  const SortItems = items.concat(items2)
+
+
   if (!fontsLoaded) {
     return null;
   }
 
   return (
-     
+
   <LinearGradient style={styles.screen}
     colors={["#FEC0CE","#E3879E"]}>
+
   
   <Text style={styles.baseText}>
   <Text style={styles.titleText}>
@@ -136,10 +143,20 @@ selectedItem={selectedItem}
 template={template}
 />}
 
-<ChooseItem>
-</ChooseItem>
-  
-  </LinearGradient>
+
+<Button title='Ordenar Items'  onPress ={() =>
+SortItems}/>
+
+<FlatList                      
+    data={items3}
+    renderItem={() => {
+      SortItems}}
+
+    keyExtractor={(item3) => item3.toString()}
+    />
+
+
+</LinearGradient>
   );
 }
 
