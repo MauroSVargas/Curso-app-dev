@@ -82,3 +82,25 @@
         selectedItem={selectedItem}
         template={template}
         />}*/
+/*
+        <FlatList                      
+            data={items3}
+            renderItem={(itemData3) => {
+              ArrayNuevo}}
+            />
+          
+          const neweeee = [1, 2]
+          const oldld = [3, 4]
+          const ahora = neweeee.concat(oldld)
+
+          console.log(ahora)
+
+          <Card openModal={openModal} itemData={itemData} type='food' />)}
+        
+          data2={(items2)}
+          renderItem2={(itemData2) => (
+            <Card openModal={openModal} itemData={itemData2} type='drinks' />)}
+
+            keyExtractor={(item) => item.id.toString()}
+            keyExtractor2={(item2) => item2.id.toString()} 
+            */

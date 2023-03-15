@@ -7,7 +7,7 @@ SplashScreen.preventAutoHideAsync();
 
 import ColorsAndSize from './src/components/constantes/ColorsAndSize';
 import ChooseItem from './src/components/ChooseItem';
-/*import ListaSorteada from './src/components/ListaSorteada';*/
+import ListaSorteada from './src/components/ListaSorteada';
 
 export default function App() {
   const [fontsLoaded] = useFonts({
@@ -21,9 +21,6 @@ React.useEffect(() => {
   }
 } , [fontsLoaded]);
 
-/*
-  const SortItems = [items.concat(items2)]
-*/
   if (!fontsLoaded) {
     return null;
   }
@@ -36,7 +33,7 @@ return (
 <ChooseItem>
 </ChooseItem>
 
-<Button title='sortear items'></Button>
+
 
 </LinearGradient>
 );}

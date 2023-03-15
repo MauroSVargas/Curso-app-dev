@@ -1,11 +1,10 @@
-import { StyleSheet, Text, View, Button, TextInput, FlatList, Pressable } from 'react-native'
+import { StyleSheet, Text, View, Button, TextInput, FlatList, Pressable,TouchableOpacity } from 'react-native'
 import React, {useState} from 'react'
 
-
-import ListaSorteada from './ListaSorteada';
 import ColorsAndSize from './constantes/ColorsAndSize';
 import Card from './card';
 import EnviarFormulario from './Modal';
+import ListaSorteada from './ListaSorteada';
 
 
 const ChooseItem = () => { 
@@ -56,6 +55,8 @@ const ChooseItem = () => {
   };
 
 
+  const ItemsOrdenados = items.concat(items2)
+
 return(
   <View>
     <Text style={styles.baseText}>
@@ -103,6 +104,14 @@ return(
           selectedItem={selectedItem}
           template={template}
           />}
+
+          <TouchableOpacity onPress= { () =>
+          ItemsOrdenados}>
+                    <Text style={styles.titleText3}>Close</Text>
+                    
+          </TouchableOpacity>
+
+
           </View>
 )}
 export default ChooseItem
@@ -137,4 +146,10 @@ const styles = StyleSheet.create({
     fontSize: 28,
     fontFamily: 'OpenSans-Bold'
   },
+
+  titleText3: {
+
+      fontSize: 28,
+      fontFamily: 'OpenSans-Bold'
+    },
 });
