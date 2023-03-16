@@ -44,7 +44,7 @@
     
     const styles = StyleSheet.create({
         screen: {
-          ...ColorsAndSize.normalSize,
+          ...ColorAndSize.normalSize,
           padding: 35
         },
       
@@ -104,3 +104,13 @@
             keyExtractor={(item) => item.id.toString()}
             keyExtractor2={(item2) => item2.id.toString()} 
             */
+
+            export default  {
+              primary: 'white',
+              secondary: '#b49286',
+              
+              normalSize: {
+                  flex:1, 
+                  alignItems: 'center',
+                  justifyContent: 'center'
+          }}

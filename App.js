@@ -5,9 +5,9 @@ import { useFonts } from 'expo-font';
 import * as SplashScreen from 'expo-splash-screen';
 SplashScreen.preventAutoHideAsync();
 
-import ColorsAndSize from './src/components/constantes/ColorsAndSize';
-import ChooseItem from './src/components/ChooseItem';
-import ListaSorteada from './src/components/ListaSorteada';
+import ColorAndSize from './src/constants/ColorAndSize';
+import ChooseItem from './src/screens/ChooseItem';
+import ListaSorteada from './src/screens/ListaSorteada';
 
 export default function App() {
   const [fontsLoaded] = useFonts({
@@ -21,25 +21,27 @@ React.useEffect(() => {
   }
 } , [fontsLoaded]);
 
+const [itemsOrdenados, setItemsOrdenados] = useState([])
+
   if (!fontsLoaded) {
     return null;
   }
 
 return (
 
-<LinearGradient style={styles.screen}
-  colors={["#FEC0CE","#E3879E"]}>
+    <LinearGradient style={styles.screen}
+      colors={["#FEC0CE", "#E3879E"]}>
 
-<ChooseItem>
-</ChooseItem>
+      {itemsOrdenados.length === 0 ?
+        <ChooseItem setItemsOrdenados={setItemsOrdenados} /> :
+        <ListaSorteada itemsOrdenados={itemsOrdenados} />}
 
-
-
-</LinearGradient>
-);}
+    </LinearGradient>
+  );
+}
 
 const styles = StyleSheet.create({
   screen: {
-    ...ColorsAndSize.normalSize,
+    ...ColorAndSize.normalSize,
     padding: 35
   }});

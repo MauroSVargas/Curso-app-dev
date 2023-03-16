@@ -1,13 +1,13 @@
-import { StyleSheet, Text, View, Button, TextInput, FlatList, Pressable,TouchableOpacity } from 'react-native'
-import React, {useState} from 'react'
+import { StyleSheet, Text, View, Button, TextInput, FlatList,
+Pressable, TouchableOpacity } from 'react-native'
+import React, { useState } from 'react'
 
-import ColorsAndSize from './constantes/ColorsAndSize';
-import Card from './card';
-import EnviarFormulario from './Modal';
+import ColorAndSize from '../constants/ColorAndSize';
+import Card from '../components/card';
+import EnviarFormulario from '../components/Modal';
 import ListaSorteada from './ListaSorteada';
 
-
-const ChooseItem = () => { 
+const ChooseItem = ({SetItemsOrdenados}) => {
 
   const [itemText, setItemText] = useState("");
   const [itemText2, setItemText2] = useState("");
@@ -15,7 +15,7 @@ const ChooseItem = () => {
   const [items2, setItems2] = useState([]);
   const [modalVisible, setModalVisible] = useState(false);
   const [selectedItem, setSelectedItem] = useState("");
-  const [template, setTemplate]=useState("");
+  const [template, setTemplate] = useState("");
   const titleText = "food"
   const titleText2 = "drinks"
 
@@ -37,7 +37,7 @@ const ChooseItem = () => {
     setItemText2("");
   };
 
-  const openModal = (item,type) => {
+  const openModal = (item, type) => {
     setSelectedItem(item)
     setTemplate(type)
     setModalVisible(true)
@@ -46,34 +46,36 @@ const ChooseItem = () => {
   const onCancelModal = () => {
     setModalVisible(!modalVisible);
   };
-  
 
-  const onDeleteModal = (id,type) => {
+
+  const onDeleteModal = (id, type) => {
     setModalVisible(!modalVisible);
-    type ==='food' ? setItems((oldArry) => oldArry.filter((item) => item.id !== id)) :
-    setItems2((oldArry) => oldArry.filter((item) => item.id !== id)) ; setSelectedItem("")
+    type === 'food' ? setItems((oldArry) => oldArry.filter((item) => item.id !== id)) :
+      setItems2((oldArry) => oldArry.filter((item) => item.id !== id)); setSelectedItem("")
   };
 
+/*
+  let ItemsOrdenados = items.concat(items2)
+*/
+  return (
+    <View>
+      <Text style={styles.baseText}>
+        <Text style={styles.titleText}>
+          {titleText}
+        </Text>
+      </Text >
 
-  const ItemsOrdenados = items.concat(items2)
-
-return(
-  <View>
-    <Text style={styles.baseText}>
-    <Text style={styles.titleText}>
-    {titleText}
-  </Text>
-  </Text >
-
-    <View style={styles.addItemInputContainer}>
-      <TextInput
-        placeholder="Item de lista"
-        style={styles.input}
-        onChangeText={onChangeText}
-        value={itemText}
-        maxLength={14} />
-      <Button title="Agregar" disabled={itemText === ''} onPress={addItemToState} />
-    </View><FlatList
+      <View style={styles.addItemInputContainer}>
+        <TextInput
+          placeholder="Item de lista"
+          style={styles.input}
+          onChangeText={onChangeText}
+          value={itemText}
+          maxLength={14} />
+        <Button title="Agregar" disabled={itemText === ''} onPress={addItemToState} />
+      
+      </View>
+      <FlatList
         data={items}
         renderItem={(itemData) => (
           <Card openModal={openModal} itemData={itemData} type='food' />)}
@@ -82,43 +84,51 @@ return(
         <Text style={styles.titleText2}>
           {titleText2}
         </Text>
-      </Text><View style={styles.addItemInputContainer}>
+      </Text>
+      
+      <View style={styles.addItemInputContainer}>
         <TextInput
           placeholder="Item de lista"
           style={styles.input}
           onChangeText={onChangeText2}
           value={itemText2} />
         <Button title="Agregar" disabled={itemText2 === ''} onPress={addItemToState2} />
-      </View><FlatList
+      
+      </View>
+      <FlatList
         data={items2}
         renderItem={(itemData2) => (
           <Card itemData={itemData2} openModal={openModal} type='drinks' />)}
 
         keyExtractor={(item2) => item2.id.toString()} />
 
-        {modalVisible&&<EnviarFormulario
-          Pressable={Pressable}
-          modalVisible={modalVisible}
-          onDeleteModal={onDeleteModal}
-          onCancelModal={onCancelModal}
-          selectedItem={selectedItem}
-          template={template}
-          />}
+      {modalVisible && <EnviarFormulario
+        Pressable={Pressable}
+        modalVisible={modalVisible}
+        onDeleteModal={onDeleteModal}
+        onCancelModal={onCancelModal}
+        selectedItem={selectedItem}
+        template={template}
+      />}
 
-          <TouchableOpacity onPress= { () =>
-          ItemsOrdenados}>
-                    <Text style={styles.titleText3}>Close</Text>
-                    
-          </TouchableOpacity>
+      <TouchableOpacity onPress={() => {
+        const orderItemsArrayById = [...items, ...items2].sort((a,b) => a.id - b.id); 
+        SetItemsOrdenados(orderItemsArrayById);
+      }
+      }>
+        <Text style={styles.titleText3}>Close</Text>
+
+      </TouchableOpacity>
 
 
-          </View>
-)}
+    </View>
+  )
+}
 export default ChooseItem
 
 const styles = StyleSheet.create({
   screen: {
-    ...ColorsAndSize.normalSize,
+    ...ColorAndSize.normalSize,
     padding: 35
   },
 
@@ -140,16 +150,16 @@ const styles = StyleSheet.create({
     fontSize: 32,
     fontFamily: 'OpenSans-Regular',
   },
-  
+
   titleText2: {
-  flex: 1,
+    flex: 1,
     fontSize: 28,
     fontFamily: 'OpenSans-Bold'
   },
 
   titleText3: {
 
-      fontSize: 28,
-      fontFamily: 'OpenSans-Bold'
-    },
+    fontSize: 28,
+    fontFamily: 'OpenSans-Bold'
+  },
 });
