@@ -5,9 +5,9 @@ import React, { useState } from 'react'
 import ColorAndSize from '../constants/ColorAndSize';
 import Card from '../components/card';
 import EnviarFormulario from '../components/Modal';
-import ListaSorteada from './ListaSorteada';
 
-const ChooseItem = ({SetItemsOrdenados}) => {
+
+const ChooseItem = ({setItemsOrdenados}) => {
 
   const [itemText, setItemText] = useState("");
   const [itemText2, setItemText2] = useState("");
@@ -112,7 +112,7 @@ const ChooseItem = ({SetItemsOrdenados}) => {
 
       <TouchableOpacity onPress={() => {
         const orderItemsArrayById = [...items, ...items2].sort((a, b) => a.id - b.id);
-        SetItemsOrdenados(orderItemsArrayById);
+        setItemsOrdenados(orderItemsArrayById);
       }
       }>
         <Text style={styles.titleText3}>Sortear array</Text>
