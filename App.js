@@ -32,9 +32,9 @@ return (
     <LinearGradient style={styles.screen}
       colors={["#FEC0CE", "#E3879E"]}>
 
-      {itemsOrdenados.length === 0 ?
-        <ChooseItem setItemsOrdenados={setItemsOrdenados} /> :
-        <ListaSorteada itemsOrdenados={itemsOrdenados} />}
+      {itemsOrdenados.length === 0 ? 
+      <ChooseItem setItemsOrdenados={setItemsOrdenados} /> : 
+      <ListaSorteada itemsOrdenados={itemsOrdenados} />}
 
     </LinearGradient>
   );

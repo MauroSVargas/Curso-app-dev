@@ -54,9 +54,8 @@ const ChooseItem = ({SetItemsOrdenados}) => {
       setItems2((oldArry) => oldArry.filter((item) => item.id !== id)); setSelectedItem("")
   };
 
-/*
-  let ItemsOrdenados = items.concat(items2)
-*/
+
+  
   return (
     <View>
       <Text style={styles.baseText}>
@@ -73,7 +72,7 @@ const ChooseItem = ({SetItemsOrdenados}) => {
           value={itemText}
           maxLength={14} />
         <Button title="Agregar" disabled={itemText === ''} onPress={addItemToState} />
-      
+
       </View>
       <FlatList
         data={items}
@@ -85,7 +84,7 @@ const ChooseItem = ({SetItemsOrdenados}) => {
           {titleText2}
         </Text>
       </Text>
-      
+
       <View style={styles.addItemInputContainer}>
         <TextInput
           placeholder="Item de lista"
@@ -93,7 +92,7 @@ const ChooseItem = ({SetItemsOrdenados}) => {
           onChangeText={onChangeText2}
           value={itemText2} />
         <Button title="Agregar" disabled={itemText2 === ''} onPress={addItemToState2} />
-      
+
       </View>
       <FlatList
         data={items2}
@@ -112,11 +111,11 @@ const ChooseItem = ({SetItemsOrdenados}) => {
       />}
 
       <TouchableOpacity onPress={() => {
-        const orderItemsArrayById = [...items, ...items2].sort((a,b) => a.id - b.id); 
+        const orderItemsArrayById = [...items, ...items2].sort((a, b) => a.id - b.id);
         SetItemsOrdenados(orderItemsArrayById);
       }
       }>
-        <Text style={styles.titleText3}>Close</Text>
+        <Text style={styles.titleText3}>Sortear array</Text>
 
       </TouchableOpacity>
 
