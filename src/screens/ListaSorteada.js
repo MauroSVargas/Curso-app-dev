@@ -22,6 +22,7 @@ const ListaSorteada = ({ itemsOrdenados }) => {
       renderItem={renderItem}
       keyExtractor={(item) => item.id}
     />
+    
   )
 }
 export default ListaSorteada 
